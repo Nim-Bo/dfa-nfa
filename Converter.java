@@ -1,30 +1,17 @@
+import model.DFA;
+import model.NFA;
+
 import java.util.*;
 
-class NFA {
-    Set<String> states;
-    Set<String> alphabet;
-    String startState;
-    Set<String> acceptStates;
-    Map<String, Set<String>> transitions;
-
-    public NFA(Set<String> states, Set<String> alphabet, String startState, Set<String> acceptStates, Map<String, Set<String>> transitions) {
-        this.states = states;
-        this.alphabet = alphabet;
-        this.startState = startState;
-        this.acceptStates = acceptStates;
-        this.transitions = transitions;
-    }
-}
-
-public class Faze2 {
-    private static DFA convert(NFA nfa) {
+public class Converter {
+    private static DFA NFAtoDFA(NFA nfa) {
         Set<Set<String>> dfaStates = new HashSet<>();
         Map<String, String> dfaTransitions = new HashMap<>();
         Set<String> dfaAcceptStates = new HashSet<>();
-        Set<String> alphabet = nfa.alphabet;
+        Set<String> alphabet = nfa.getAlphabet();
 
         Map<Set<String>, String> stateMapping = new HashMap<>();
-        Set<String> startState = new HashSet<>(Collections.singletonList(nfa.startState));
+        Set<String> startState = new HashSet<>(Collections.singletonList(nfa.getStartState()));
         Queue<Set<String>> queue = new LinkedList<>();
         queue.add(startState);
 
@@ -39,8 +26,8 @@ public class Faze2 {
 
                 for (String state : currentStates) {
                     String key = state + "," + symbol;
-                    if (nfa.transitions.containsKey(key)) {
-                        nextStates.addAll(nfa.transitions.get(key));
+                    if (nfa.getTransitions().containsKey(key)) {
+                        nextStates.addAll(nfa.getTransitions().get(key));
                     }
                 }
 
@@ -60,7 +47,7 @@ public class Faze2 {
 
         for (Set<String> stateSet : dfaStates) {
             for (String state : stateSet) {
-                if (nfa.acceptStates.contains(state)) {
+                if (nfa.getAcceptStates().contains(state)) {
                     dfaAcceptStates.add(stateMapping.get(stateSet));
                     break;
                 }
@@ -103,7 +90,7 @@ public class Faze2 {
         }
 
         NFA nfa = new NFA(states, alphabet, startState, acceptStates, transitions);
-        DFA dfaDto = convert(nfa);
+        DFA dfaDto = NFAtoDFA(nfa);
 
         System.out.println("\nConverted DFA:");
         dfaDto.printDFA();
