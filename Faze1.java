@@ -1,11 +1,11 @@
 import java.util.*;
 
 class DFA {
-    private Set<String> states;
-    private Set<String> alphabet;
-    private String startState;
-    private Set<String> acceptStates;
-    private Map<String, String> transitions;
+    Set<String> states;
+    Set<String> alphabet;
+    String startState;
+    Set<String> acceptStates;
+    Map<String, String> transitions;
 
     public DFA(Set<String> states, Set<String> alphabet, String startState, Set<String> acceptStates, Map<String, String> transitions) {
         this.states = states;
@@ -69,13 +69,24 @@ class DFA {
 
     public String findShortestAcceptedString() {
         List<String> strings = generateAcceptedStrings(1000, 1);
-        return strings.isEmpty() ? null : strings.get(0);
+        return strings.isEmpty() ? null : strings.getFirst();
     }
 
     public String findLongestAcceptedString() {
         int maxLength = 100; // Adjust as needed
         List<String> strings = generateAcceptedStrings(maxLength, Integer.MAX_VALUE);
         return strings.stream().max(Comparator.comparingInt(String::length)).orElse(null);
+    }
+
+    public void printDFA() {
+        System.out.println("DFA States: " + states);
+        System.out.println("DFA Alphabet: " + alphabet);
+        System.out.println("DFA Start State: " + startState);
+        System.out.println("DFA Accept States: " + acceptStates);
+        System.out.println("DFA Transitions: ");
+        for (Map.Entry<String, String> entry : transitions.entrySet()) {
+            System.out.println("  " + entry.getKey() + " -> " + entry.getValue());
+        }
     }
 }
 
