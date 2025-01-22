@@ -79,7 +79,7 @@ class DFA {
     }
 }
 
-public class Main {
+public class Faze1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
