@@ -90,4 +90,24 @@ public class DFA {
             System.out.println("  " + entry.getKey() + " -> " + entry.getValue());
         }
     }
+
+    public Set<String> getStates() {
+        return states;
+    }
+
+    public Set<String> getAlphabet() {
+        return alphabet;
+    }
+
+    public String getStartState() {
+        return startState;
+    }
+
+    public Set<String> getAcceptStates() {
+        return acceptStates;
+    }
+
+    public Map<String, String> getTransitions() {
+        return transitions;
+    }
 }
