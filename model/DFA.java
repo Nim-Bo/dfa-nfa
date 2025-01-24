@@ -70,13 +70,13 @@ public class DFA {
     }
 
     public String findShortestAcceptedString() {
-        List<String> strings = generateAcceptedStrings(1000, 1);
+        List<String> strings = generateAcceptedStrings(1, 1);
         return strings.isEmpty() ? null : strings.getFirst();
     }
 
     public String findLongestAcceptedString() {
-        int maxLength = 100; // Adjust as needed
-        List<String> strings = generateAcceptedStrings(maxLength, Integer.MAX_VALUE);
+        int maxLength = 100;
+        List<String> strings = generateAcceptedStrings(maxLength, 20);
         return strings.stream().max(Comparator.comparingInt(String::length)).orElse(null);
     }
 

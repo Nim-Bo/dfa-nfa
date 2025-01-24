@@ -49,7 +49,7 @@ public class DFAProcessor {
 
             switch (choice) {
                 case "1":
-                    System.out.print("Enter a string: ");
+                    System.out.print("Entq0,q1,q2er a string: ");
                     String input = scanner.nextLine();
                     if (dfa.isAccepted(input)) {
                         System.out.println("The string is accepted.");
